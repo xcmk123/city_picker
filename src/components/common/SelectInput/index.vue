@@ -9,6 +9,7 @@
       :disabled="disabled"
       readonly
     />
+    <div class="select_arrow" />
     <div class="select_items">
       <slot 
         name="option" 
@@ -44,12 +45,9 @@ export default {
     },
   },
   methods: {
-    onChange(e) {
-      this.$emit('onChange', { name: this.name, value: e.target.value } )
-    },
     handleOpenSelect() {
       this.isOpen = !this.isOpen
-    }
+    },
   }
 }
 </script>
@@ -85,6 +83,20 @@ export default {
       background-color: #FFFFFF;
       -webkit-box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
       box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
+    }
+    .select_arrow {
+      position: absolute;
+      width: 0; 
+      height: 0; 
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid black;
+      top: calc(50% - 2px);
+      right: 14px;
+      transition: all150ms ease-in;
+    }
+    .form-control:focus-visible + .select_arrow {
+      transform: rotateX(180deg);
     }
     input:disabled {
       opacity: 0.65;

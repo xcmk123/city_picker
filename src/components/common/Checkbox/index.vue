@@ -1,9 +1,10 @@
 <template>
-  <label class="checkbox" :for="title">
+  <label class="checkbox" :for="title" @click="onClickItem(id)">
     <input 
       class="checkbox__input" 
-      type="checkbox" :name="title" 
-      :id="title" 
+      type="checkbox" 
+      :name="id"
+      :checked="isChecked"
     />
     <div class="checkbox__box"></div>
     {{ title }}
@@ -16,7 +17,20 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    id: {
+      type: String,
+      default: ''
+    },
+    isChecked: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    onClickItem(id) {
+      this.$emit('onChangeValue', id)
+    } 
   }
 }
 </script>

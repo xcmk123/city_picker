@@ -10,6 +10,7 @@
       'btn--disable': disable,
       'btn--color--primary': textPrimary
     }"
+    :disabled="disable"
     @click="onClick" 
   >
     <slot></slot>

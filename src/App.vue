@@ -7,27 +7,27 @@
       width="125"
       height="125"
     />
-
     <div class="wrapper">
       <SelectInput placeholder="Chọn tỉnh thành">
         <template v-slot:option="{ isOpen, onToggle }">
           <div v-if="isOpen" class="select_menu_container">
-            <Checkbox title="Hà Nội" />
-            <Checkbox title="Hưng Yên" />
-            <Checkbox title="Tp HCM" />
+            <Checkbox 
+              v-for="city of CITYS"
+              :title="city.name" 
+              :key="city.id"
+              :id="city.id"
+              :isChecked="city.isChecked"
+              @onChangeValue="handleSelectCity" 
+            />
             <div class="group_button">
-              <Button disable>Đồng ý</Button>
-              <Button text textPrimary>Huỷ</Button>
+              <Button @onClickEvent="handleSubmitCity(onToggle)" :disable="isAtLeastOneCitySelected" :primary="!isAtLeastOneCitySelected">Đồng ý</Button>
+              <Button @onClickEvent="handleCloseSelect(onToggle)" text textPrimary>Huỷ</Button>
             </div>
           </div>
         </template>
       </SelectInput>
       <div class="group_chip_container">
-        <Chip title="Hà Nội" />
-        <Chip title="Hưng Yên" />
-        <Chip title="Tp HCM" />
-        <Chip title="Hưng Yên" />
-        <Chip title="Tp HCM" />
+        <Chip v-for="city of CITYS" :title="city.name" :key="city.id"/>
       </div>
     </div>
   </header>
@@ -36,22 +36,60 @@
 </template>
 
 <script>
-  import SelectInput from './components/common/SelectInput/index.vue';
-  import Checkbox from './components/common/Checkbox/index.vue';
-  import Button from './components/common/Button/index.vue';
-  import Chip from './components/common/Chip/index.vue';
-  export default {
-    components: {
-      SelectInput,
-      Checkbox,
-      Button,
-      Chip
+import SelectInput from "./components/common/SelectInput/index.vue";
+import Checkbox from "./components/common/Checkbox/index.vue";
+import Button from "./components/common/Button/index.vue";
+import Chip from "./components/common/Chip/index.vue";
+import { CITYS } from "@/constant/index.js"
+export default {
+  data() {
+    return {
+      cacheSelectedCitys: [],
+      CITYS: CITYS,
+    }
+  },
+  components: {
+    SelectInput,
+    Checkbox,
+    Button,
+    Chip,
+  },
+  // created() {
+  //   this.cacheSelectedCitys = [...CITYS]
+  // },
+  methods: {
+    handleSubmitCity(method) {
+      const result =  this.CITYS.filter(city => city.isChecked)
+      this.cacheSelectedCitys = result
+      method()
     },
+    handleCloseSelect(method) {
+      this.CITYS = [...this.cacheSelectedCitys]
+      method()
+    },
+    handleSelectCity(id) {
+      const indexOfCity = CITYS.findIndex(city => city.id === id)
+      const result = [
+        ...this.CITYS.slice(0, indexOfCity),
+        {
+          ...this.CITYS[indexOfCity],
+          isChecked: !this.CITYS[indexOfCity].isChecked
+        },
+        ...this.CITYS.slice(indexOfCity + 1),
+      ]
+      this.CITYS = result
+    }
+  },
+  computed: {
+    isAtLeastOneCitySelected() {
+      return !this.CITYS.some(city => city.isChecked)
+    }
   }
+};
 </script>
 
-
-<style lang="scss" scoped>@import "@/assets/base.css";
+<style lang="scss" scoped>
+@import "@/assets/base.css";
 .group_button {
   display: flex;
   gap: 10px;
