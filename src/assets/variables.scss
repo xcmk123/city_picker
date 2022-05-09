@@ -1,0 +1,24 @@
+$--color-btn-primary: rgb(45, 164, 79);
+$--color-btn-primary-hover: rgb(39, 150, 70);
+$--color-fg-default: #24292f;
+$--color-btn-text: rgb(255, 255, 255);
+$--color-btn-default-hover: #d0d7de;
+$--color-border-default: #d0d7de;
+$--color-border-focus-visible: #0969da;
+
+$--color-header-bg: #24292f;
+$--color-href-text: #0969da;
+$--color-group-btn-selected-bg: #eaeaea;
+$--color-dot-status-completed: rgb(45, 164, 79);
+$--color-dot-status-processing: rgb(9, 105, 218);
+$--color-dot-status-pending: rgb(208, 215, 222);
+
+$--color-border-default: #d0d7de;
+$--font-size: 14px;
+
+@mixin font-apple {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  line-height: 1.5;
+}
+
