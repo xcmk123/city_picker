@@ -3,8 +3,9 @@ import { CITYS } from '@/constant'
 const store = createStore({
   state() {
     return {
-      cacheAllCity: [],
+      cacheAllCity: [...CITYS],
       allCity: [...CITYS],
+      count: 0
     }
   },
   mutations: {
@@ -12,7 +13,7 @@ const store = createStore({
       state.cacheAllCity = [...state.allCity]
     },
     closeSelectCity(state) {
-      state.allCity = [...state.cacheAllCity]
+      return state.allCity = [...state.cacheAllCity]
     },
     removeSelectedCity(state, id) {
       const { allCity } = state

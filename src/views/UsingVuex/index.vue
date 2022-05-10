@@ -4,7 +4,7 @@
       <div v-if="isOpen" class="select_menu_container">
         <div class="list_item_container">
           <Checkbox
-            v-for="city of this.$store.state.allCity"
+            v-for="city of allCityState"
             :title="city.name"
             :key="city.id"
             :id="city.id"
@@ -15,8 +15,8 @@
         <div class="group_button">
           <Button
             @onClickEvent="handleSubmitCity(onToggle)"
-            :disable="isAtLeastOneCitySelected"
-            :primary="!isAtLeastOneCitySelected"
+            :disable="isDisable"
+            :primary="!isDisable"
           >
             Đồng ý
           </Button>
@@ -29,7 +29,7 @@
   </SelectInput>
   <div class="group_chip_container">
     <Chip
-      v-for="city of selectedCitys"
+      v-for="city of allSelectedCityState"
       :title="city.name"
       :key="city.id"
       :id="city.id"
@@ -43,12 +43,13 @@ import SelectInput from "@/components/common/SelectInput/index.vue";
 import Checkbox from "@/components/common/Checkbox/index.vue";
 import Button from "@/components/common/Button/index.vue";
 import Chip from "@/components/common/Chip/index.vue";
+import { mapState } from "vuex";
 import { 
   submitSelectCity, 
   closeSelectCity, 
   selectCity,
   removeSelectedCity
-} from "../../action";
+} from "@/store/mutations";
 export default {
   components: {
     SelectInput,
@@ -71,12 +72,24 @@ export default {
     }
   },
   computed: {
-    isAtLeastOneCitySelected() {
-      return !this.$store.state.allCity.some(city => city.isChecked)
-    },
-    selectedCitys() {
-      return this.$store.state.allCity.filter(city => city.isChecked)
-    }
+    ...mapState({
+      allCity: state => state.allCity,
+      allCityState: 'allCity',
+    }),
+    ...mapState({
+      isDisable: false,
+      isAtLeastOneCityHadSelected (state) {
+        return state.allCity.some(city => city.isChecked )
+      } 
+    }),
+    ...mapState({
+      allCity: state => state.allCity,
+      allSelectedCityState: 'allCity',
+      filterAllSelectedCity (state) {
+        console.log(state)
+        return state.allCity.filter(city => city.isChecked )
+      } 
+    })
   }
 };
 </script>

@@ -91,7 +91,7 @@ export default {
     color: #007BC3;
   }
   .btn--filled--primary {
-    background-color: $--color-btn-primary;
+    background-color: #007BC3;
     color: #FFFFFF;
   }
   .f-12 {

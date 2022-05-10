@@ -1,4 +1,4 @@
-import store from "../store"
+import store from ".";
 
 export const submitSelectCity = (method) => {
   store.commit('submitSelectCity')
@@ -8,6 +8,7 @@ export const submitSelectCity = (method) => {
 export const removeSelectedCity = (id) => {
   store.commit('removeSelectedCity', id)
 }
+
 export const selectCity = (id) => {
   store.commit('selectCity', id)
 }

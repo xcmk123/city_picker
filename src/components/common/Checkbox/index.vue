@@ -41,6 +41,7 @@ export default {
     align-items: center;
     cursor: pointer;
     width: 100%;
+    height: 40px;
     padding: 11px 19px;
     box-sizing: border-box;
     transition: all 150ms ease-in;

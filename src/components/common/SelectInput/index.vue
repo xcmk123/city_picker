@@ -64,26 +64,25 @@ export default {
       vertical-align: middle;
       border-radius: 6px;
       outline: none;
-      border: 1px solid $--color-border-default;
-      transition: 0.15s ease-in;
+      border: 1px solid #999999;
+      transition: 150ms ease-in;
       width: 100%;
-      height: 42px;
+      height: 48px;
       box-sizing: border-box;
       &:focus {
-        border-color: $--color-border-focus-visible;
-        box-shadow: inset 0 0 0 1px $--color-border-focus-visible;
+        border-color: rgba(0, 123, 195, 0.32);
+        box-shadow: 0px 0px 8px rgba(0, 123, 195, 0.32);
       }
     }
     .select_items {
       position: absolute;
       top: calc(100% + 2px);
-      z-index: 1005;
+      z-index: 1000;
       width: 100%;
       border-radius: 5px;
       overflow: auto;
       background-color: #FFFFFF;
-      -webkit-box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
-      box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
+      box-shadow: 0px 1px 4px rgba(102, 102, 102, 0.2);
     }
     .select_arrow {
       position: absolute;
@@ -91,13 +90,9 @@ export default {
       height: 0; 
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-bottom: 5px solid black;
+      border-top: 5px solid black;
       top: calc(50% - 2px);
       right: 14px;
-      transition: all 300ms ease-in;
-    }
-    .form-control:focus-visible + .select_arrow {
-      transform: rotateX(180deg);
     }
     input:disabled {
       opacity: 0.65;

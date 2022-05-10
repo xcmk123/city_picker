@@ -36,7 +36,7 @@ export default {
   font-weight: normal;
 }
 .wrapper {
-  width: 400px;
+  width: 480px;
 }
 header {
   line-height: 1.5;

@@ -112,9 +112,18 @@ export default {
   .select_menu_container {
     padding-top: 8px;
     .list_item_container {
-      max-height: 300px;
-      margin-right: 5px;
+      max-height: calc(304px - 64px - 8px);
+      margin-right: 4px;
       overflow: auto;
+      /* width */
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #DCDCDC; 
+        border-radius: 8px;
+      }
     }
   }
   .wrapper {
@@ -124,9 +133,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     width: inherit;
-    min-height: 50px;
-    gap: 4px;
+    min-height: 48px;
     box-sizing: border-box;
+    gap: 4px;
     padding: 8px;
     border: 1px solid #999999;
     border-radius: 4px;

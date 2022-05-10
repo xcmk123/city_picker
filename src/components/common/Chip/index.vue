@@ -32,18 +32,20 @@ export default {
 
 <style lang="scss" scoped>
   .chip_container {
-    width: 134px;
-    height: 32px;
-    background-color: #F8F8F8;
     position: relative;
     display: inline-flex;
+    background-color: #F8F8F8;
+    height: 32px;
+    gap: 10.5px;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     padding: 4px 10px 4px 16px;
     border-radius: 32px;
     .chip_content {
-      text-align: center;
       width: 100%;
+      padding: 0 10px;
+      text-align: center;
     }
     .chip_close_icon {
       &::after {
