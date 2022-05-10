@@ -80,6 +80,7 @@ export default {
       z-index: 1005;
       width: 100%;
       border-radius: 5px;
+      overflow: auto;
       background-color: #FFFFFF;
       -webkit-box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
       box-shadow: 0px 2px 10px 1px rgb(0 0 0 / 20%);
@@ -93,7 +94,7 @@ export default {
       border-bottom: 5px solid black;
       top: calc(50% - 2px);
       right: 14px;
-      transition: all150ms ease-in;
+      transition: all 300ms ease-in;
     }
     .form-control:focus-visible + .select_arrow {
       transform: rotateX(180deg);

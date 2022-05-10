@@ -53,7 +53,7 @@ export default {
     padding: 5px 19px;
     box-sizing: border-box;
     width: 104px;
-    transition: 0.15s ease-in;
+    transition: 150ms ease-in;
     vertical-align: middle;
     white-space: nowrap;
     @include font-apple;

@@ -3,6 +3,10 @@
     <div class="chip_content">
       {{ title }}
     </div>
+    <div 
+      class="chip_close_icon" 
+      @click="onClick(id)"
+    />
   </div>
 </template>
 
@@ -12,6 +16,15 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    id: {
+      type: Number,
+      default: null
+    }
+  },
+  methods: {
+    onClick(id) {
+      this.$emit('onClickRemove', id)
     }
   }
 }
@@ -32,10 +45,11 @@ export default {
       text-align: center;
       width: 100%;
     }
+    .chip_close_icon {
+      &::after {
+      content: "\00d7";
+      transform: scale(1.2);
+      }
+    }
   }
-  .chip_container::after {
-    content: "\00d7";
-    position: sticky;
-    transform: scale(1.2);
-  } 
 </style>
