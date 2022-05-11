@@ -32,7 +32,6 @@ const store = createStore({
       state.cacheAllCity = result
     },
     [ MUTATION.SELECT_CITY ] (state, payload) {
-      console.log(payload)
       const { allCity } = state
       const indexOfCity = CITYS.findIndex(city => city.id === payload.id)
       const result = [
