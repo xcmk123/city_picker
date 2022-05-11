@@ -1,21 +1,23 @@
 import { createStore } from 'vuex'
 import { CITYS } from '@/constant'
+import { MUTAION, GETTERS } from './constant'
 const store = createStore({
   state() {
     return {
       cacheAllCity: [...CITYS],
       allCity: [...CITYS],
-      count: 0
     }
   },
   mutations: {
-    submitSelectCity(state) {
+    [ MUTAION.SUMBIT_SELECT_CITY ] (state, payload) {
       state.cacheAllCity = [...state.allCity]
+      payload.method()
     },
-    closeSelectCity(state) {
+    [ MUTAION.CLOSE_SELECT_CITY ] (state, payload) {
       return state.allCity = [...state.cacheAllCity]
+      payload.method()
     },
-    removeSelectedCity(state, id) {
+    [ MUTAION.REMOVE_SELECTED_CITY ] (state, id) {
       const { allCity } = state
       const indexOfCity = CITYS.findIndex(city => city.id === id)
       const result = [
@@ -29,9 +31,10 @@ const store = createStore({
       state.allCity = result
       state.cacheAllCity = result
     },
-    selectCity(state, id) {
+    [ MUTAION.SELECT_CITY ] (state, payload) {
+      console.log(payload)
       const { allCity } = state
-      const indexOfCity = CITYS.findIndex(city => city.id === id)
+      const indexOfCity = CITYS.findIndex(city => city.id === payload.id)
       const result = [
         ...allCity.slice(0, indexOfCity),
         {
@@ -41,6 +44,14 @@ const store = createStore({
         ...allCity.slice(indexOfCity + 1),
       ]
       state.allCity = result
+    }
+  },
+  getters: {
+    [ GETTERS.ALL_SELECTED_CITY]: (state) => {
+      return state.allCity.filter(city => city.isChecked)
+    },
+    [ GETTERS.iS_AT_LEAST_ONE_CITY_HAD_SELECTED ]: (state) => {
+      return state.allCity.some(city => city.isChecked)
     }
   }
 })

@@ -4,23 +4,23 @@
       <div v-if="isOpen" class="select_menu_container">
         <div class="list_item_container">
           <Checkbox
-            v-for="city of allCityState"
+            v-for="city of allCity"
             :title="city.name"
             :key="city.id"
             :id="city.id"
             :isChecked="city.isChecked"
-            @onChangeValue="handleSelectCity"
+            @onChangeValue="[ MUTAION.SELECT_CITY ]({ id })"
           />
         </div>
         <div class="group_button">
           <Button
             @onClickEvent="handleSubmitCity(onToggle)"
-            :disable="isDisable"
-            :primary="!isDisable"
+            :disable="!isAtLeastOneCityHadSelected"
+            :primary="isAtLeastOneCityHadSelected"
           >
             Đồng ý
           </Button>
-          <Button @onClickEvent="handleCloseSelectCity(onToggle)" text textPrimary>
+          <Button @onClickEvent="[MUTAION.CLOSE_SELECT_CITY](onToggle)" text textPrimary>
             Huỷ
           </Button>
         </div>
@@ -29,7 +29,7 @@
   </SelectInput>
   <div class="group_chip_container">
     <Chip
-      v-for="city of allSelectedCityState"
+      v-for="city of allSelectedCity"
       :title="city.name"
       :key="city.id"
       :id="city.id"
@@ -43,14 +43,14 @@ import SelectInput from "@/components/common/SelectInput/index.vue";
 import Checkbox from "@/components/common/Checkbox/index.vue";
 import Button from "@/components/common/Button/index.vue";
 import Chip from "@/components/common/Chip/index.vue";
-import { mapState } from "vuex";
-import { 
-  submitSelectCity, 
-  closeSelectCity, 
-  selectCity,
-  removeSelectedCity
-} from "@/store/mutations";
+import { mapGetters, mapMutations, mapState } from "vuex";
+import { STATE, GETTERS, MUTAION } from '@/store/constant'
 export default {
+  data() {
+    return {
+      MUTAION: MUTAION
+    }
+  },
   components: {
     SelectInput,
     Checkbox,
@@ -58,38 +58,21 @@ export default {
     Chip,
   },
   methods: {
-    handleSubmitCity(method) {
-      submitSelectCity(method)
-    },
-    handleCloseSelectCity(method) {
-      closeSelectCity(method)
-    },
-    handleRemoveSelectedCity(id) { 
-      removeSelectedCity(id)
-    },
-    handleSelectCity(id) {
-      selectCity(id)
-    }
+    ...mapMutations(
+      [ MUTAION.SUMBIT_SELECT_CITY ],
+      [ MUTAION.CLOSE_SELECT_CITY ],
+      [ MUTAION.REMOVE_SELECTED_CITY ],
+      [ MUTAION.SELECT_CITY ],
+    ),
   },
   computed: {
-    ...mapState({
-      allCity: state => state.allCity,
-      allCityState: 'allCity',
-    }),
-    ...mapState({
-      isDisable: false,
-      isAtLeastOneCityHadSelected (state) {
-        return state.allCity.some(city => city.isChecked )
-      } 
-    }),
-    ...mapState({
-      allCity: state => state.allCity,
-      allSelectedCityState: 'allCity',
-      filterAllSelectedCity (state) {
-        console.log(state)
-        return state.allCity.filter(city => city.isChecked )
-      } 
-    })
+    ...mapState([
+      STATE.ALL_CITY
+    ]),
+    ...mapGetters([
+      GETTERS.ALL_SELECTED_CITY,
+      GETTERS.iS_AT_LEAST_ONE_CITY_HAD_SELECTED
+    ])
   }
 };
 </script>
