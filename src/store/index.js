@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import { CITYS } from '@/constant'
-import { MUTAION, GETTERS } from './constant'
+import { MUTATION, GETTERS } from './constant'
 const store = createStore({
   state() {
     return {
@@ -9,17 +9,17 @@ const store = createStore({
     }
   },
   mutations: {
-    [ MUTAION.SUMBIT_SELECT_CITY ] (state, payload) {
+    [ MUTATION.SUBMIT_SELECT_CITY ] (state, payload) {
       state.cacheAllCity = [...state.allCity]
-      payload.method()
+      return payload.method()
     },
-    [ MUTAION.CLOSE_SELECT_CITY ] (state, payload) {
-      return state.allCity = [...state.cacheAllCity]
-      payload.method()
+    [ MUTATION.CLOSE_SELECT_CITY ] (state, payload) {
+      state.allCity = [...state.cacheAllCity]
+      return payload.method()
     },
-    [ MUTAION.REMOVE_SELECTED_CITY ] (state, id) {
+    [ MUTATION.REMOVE_SELECTED_CITY ] (state, payload) {
       const { allCity } = state
-      const indexOfCity = CITYS.findIndex(city => city.id === id)
+      const indexOfCity = CITYS.findIndex(city => city.id === payload.id)
       const result = [
         ...allCity.slice(0, indexOfCity),
         {
@@ -31,7 +31,7 @@ const store = createStore({
       state.allCity = result
       state.cacheAllCity = result
     },
-    [ MUTAION.SELECT_CITY ] (state, payload) {
+    [ MUTATION.SELECT_CITY ] (state, payload) {
       console.log(payload)
       const { allCity } = state
       const indexOfCity = CITYS.findIndex(city => city.id === payload.id)

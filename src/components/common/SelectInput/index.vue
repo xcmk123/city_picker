@@ -9,7 +9,9 @@
       :disabled="disabled"
       readonly
     />
-    <div class="select_arrow" />
+    <div class="select_arrow">
+      <img :src="drop_menu_icon" alt="drop_menu_icon" />
+    </div>
     <div class="select_items">
       <slot 
         name="option" 
@@ -22,9 +24,11 @@
 </template>
 
 <script>
+import drop_menu_icon from '@/assets/icons/drop_menu_icon.png'
 export default {
   data() {
     return {
+      drop_menu_icon: drop_menu_icon,
       isOpen: false
     }
   },
@@ -86,13 +90,15 @@ export default {
     }
     .select_arrow {
       position: absolute;
-      width: 0; 
-      height: 0; 
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid black;
-      top: calc(50% - 2px);
-      right: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      right: 16px;
+      top: 50%;
+      img {
+        display: block;
+      }
     }
     input:disabled {
       opacity: 0.65;

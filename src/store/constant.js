@@ -7,8 +7,8 @@ export const GETTERS = {
   iS_AT_LEAST_ONE_CITY_HAD_SELECTED: 'isAtLeastOneCityHadSelected'
 }
 
-export const MUTAION = { 
-  SUMBIT_SELECT_CITY: 'submitSelectCity',
+export const MUTATION = { 
+  SUBMIT_SELECT_CITY: 'submitSelectCity',
   CLOSE_SELECT_CITY: 'closeSelectCity',
   REMOVE_SELECTED_CITY: 'removeSelectedCity',
   SELECT_CITY: 'selectCity'

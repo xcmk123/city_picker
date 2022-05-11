@@ -3,15 +3,23 @@
     <div class="chip_content">
       {{ title }}
     </div>
-    <div 
-      class="chip_close_icon" 
-      @click="onClick(id)"
-    />
+    <div @click="onClick(id)">
+      <img 
+        :src="close_icon"
+        alt="close_icon"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import close_icon from '@/assets/icons/close_icon.png'
 export default {
+  data() {
+    return {
+      close_icon: close_icon
+    }
+  },
   props: {
     title: {
       type: String,
@@ -46,12 +54,6 @@ export default {
       width: 100%;
       padding: 0 10px;
       text-align: center;
-    }
-    .chip_close_icon {
-      &::after {
-      content: "\00d7";
-      transform: scale(1.2);
-      }
     }
   }
 </style>
